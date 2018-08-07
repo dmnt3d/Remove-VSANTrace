@@ -1,0 +1,10 @@
+var ConfigElementAccessor = System.getModule("com.vmware.pscoe.library.util").ConfigElementAccessor();
+var vSphereReplicationConfig = new ConfigElementAccessor("UBP/vSphere", "vSphereReplication");
+
+var workflowToLaunch = Server.getWorkflowWithId("44ac4517-37f0-4457-ae92-5d405922027d"); // Create Replication workflow
+var workflowParameters = new Properties();
+workflowParameters.put("vCenterVm", vCenterVm); 
+workflowParameters.put("clusterName", clusterName);
+workflowParameters.put("datastoreName", datastoreName);
+workflowParameters.put("rpo", rpo);
+var createReplicationToken = workflowToLaunch.execute(workflowParameters, vSphereReplicationConfig.get("remoteSiteUsername"), vSphereReplicationConfig.get("remoteSitePassword"));
